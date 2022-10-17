@@ -23,6 +23,16 @@ export class UsersController {
   ) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/profile')
+  profile(@Session() session: any) {
+    const { userId } = session;
+    if (!userId) {
+      return { message: 'Not logged in' };
+    }
+    return this.usersService.findById(parseInt(userId, 10));
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   findAlUsers() {
     return this.usersService.findAll();
@@ -38,16 +48,6 @@ export class UsersController {
   @Get('/all/:email')
   findUserByEmail(@Param('email') email: string) {
     return this.usersService.findByEmail(email);
-  }
-
-  @Get('/colors/:color')
-  setColor(@Param('color') color: string, @Session() session: any) {
-    session.color = color;
-  }
-
-  @Get('/colors')
-  getColor(@Session() session: any) {
-    return session.color;
   }
 
   @Post('/signup')
@@ -69,6 +69,7 @@ export class UsersController {
   @Post('/signout')
   signout(@Session() session: any) {
     session.userId = null;
+    return { message: 'Successfully signed out' };
   }
 
   @Patch('/:id')
