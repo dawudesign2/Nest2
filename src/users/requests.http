@@ -1,14 +1,14 @@
 ### Create a new user
-POST  http://localhost:8000/auth/signup
+POST  http://localhost:8000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "dawud@test.fr",
-  "password": "123456"
+  "email": "dawud@test.com",
+  "password": "azertyuiop"
 }
 
 ### Find a user by id 
-GET  http://localhost:8000/auth/2
+GET  http://localhost:8000/auth/1
 Content-Type: application/json
 
 ### Find a user by email
@@ -20,16 +20,16 @@ Content-Type: application/json
 GET  http://localhost:8000/auth
 Content-Type: application/json
 
-
 ### Update a user
 PATCH   http://localhost:8000/auth/1
 Content-Type: application/json
 
 {
-  "password": "azertyuiop"
+  "email": "dawud@test.com"
 }
-
 
 ### Delete a user
 DELETE  http://localhost:8000/auth/1
 Content-Type: application/json
+
+
